@@ -15,7 +15,7 @@ A small Node.js + Express backend project to practice route params, query params
 
 ## How to Run
 ```bash
-git clone https://github.com/QunnorQuarantine/mini-backend-api.git 
+git clone https://github.com/QunnorQuarantine/backend.git 
 npm install
 node index.js
 
