@@ -19,9 +19,10 @@ A small Node.js + Express backend project to practice:
 
 ## 📸 Screenshots
 
-- Profile Request – `screenshots/profile-request.png`
-- Product Request – `screenshots/product-request.png`
-- Products List – `screenshots/product-list.png`
+![Profile Request](screenshots/profile-request.png)
+![Product Request](screenshots/product-request.png)
+![Products List](screenshots/product-list.png)
+
 
 ---
 
