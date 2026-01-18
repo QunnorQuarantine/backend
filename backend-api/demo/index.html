@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Auth Demo</title>
+  </head>
+  <body>
+    <h2>Register</h2>
+    <input id="rEmail" placeholder="email" />
+    <input id="rPass" placeholder="password" type="password" />
+    <button onclick="register()">Register</button>
+
+    <h2>Login</h2>
+    <input id="lEmail" placeholder="email" />
+    <input id="lPass" placeholder="password" type="password" />
+    <button onclick="login()">Login</button>
+
+    <h2>Protected: GET /users</h2>
+    <button onclick="getUsers()">Get users</button>
+
+    <pre id="out"></pre>
+
+    <script>
+      const API = "http://localhost:3000";
+      const out = (x) => (document.getElementById("out").textContent =
+        typeof x === "string" ? x : JSON.stringify(x, null, 2));
+
+      async function register() {
+        const email = document.getElementById("rEmail").value;
+        const password = document.getElementById("rPass").value;
+
+        const res = await fetch(API + "/users", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        });
+
+        out(await res.json());
+      }
+
+      async function login() {
+        const email = document.getElementById("lEmail").value;
+        const password = document.getElementById("lPass").value;
+
+        const res = await fetch(API + "/users/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        });
+
+        const data = await res.json();
+        if (data.token) localStorage.setItem("token", data.token);
+        out(data);
+      }
+
+      async function getUsers() {
+        const token = localStorage.getItem("token");
+
+        const res = await fetch(API + "/users", {
+          headers: { Authorization: "Bearer " + token },
+        });
+
+        out(await res.json());
+      }
+    </script>
+  </body>
+</html>
